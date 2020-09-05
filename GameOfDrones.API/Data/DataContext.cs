@@ -5,7 +5,8 @@ namespace GameOfDrones.API.Data
 {
     public partial class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options)
         {
         }
 
@@ -26,6 +27,11 @@ namespace GameOfDrones.API.Data
                 entity.Property(e => e.AUid).HasColumnName("A_UID");
 
                 entity.Property(e => e.AAaUid).HasColumnName("A_AA_UID");
+
+                entity.Property(e => e.ADateCreated)
+                    .HasColumnName("A_Date_Created")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.ADescription)
                     .IsRequired()

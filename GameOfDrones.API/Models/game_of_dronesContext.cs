@@ -20,14 +20,14 @@ namespace GameOfDrones.API.Models
         public virtual DbSet<GameStatistics> GameStatistics { get; set; }
         public virtual DbSet<User> User { get; set; }
 
-//         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//         {
-//             if (!optionsBuilder.IsConfigured)
-//             {
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                 optionsBuilder.UseSqlServer("Server=gameofdronesuruit.database.windows.net,1433;Initial Catalog=game_of_drones;Persist Security Info=False;User ID=javiseeker;Password=Javier.123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-//             }
-//         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=gameofdronesuruit.database.windows.net,1433;Initial Catalog=game_of_drones;Persist Security Info=False;User ID=javiseeker;Password=Javier.123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,11 @@ namespace GameOfDrones.API.Models
                 entity.Property(e => e.AUid).HasColumnName("A_UID");
 
                 entity.Property(e => e.AAaUid).HasColumnName("A_AA_UID");
+
+                entity.Property(e => e.ADateCreated)
+                    .HasColumnName("A_Date_Created")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.ADescription)
                     .IsRequired()
