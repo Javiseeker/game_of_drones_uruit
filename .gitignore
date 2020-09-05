@@ -1,0 +1,89 @@
+#.NET IGNORE LIST
+
+# Mac OS System Files
+.DS_Store
+Thumbs.db
+
+# compiled output
+GameOfDrones.API/obj
+GameOfDrones.API/bin
+/GameOfDrones.API/obj
+/GameOfDrones.API/bin
+GameOfDrones.API.Tests/obj
+GameOfDrones.API.Tests/bin
+/GameOfDrones.API.Tests/obj
+/GameOfDrones.API.Tests/bin
+/GameOfDrones.API/appsettings.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+.vscode
+/vscode
+
+
+# IDE Visual Studio
+.vs/*
+.vs
+/vs
+
+# GameOfDrones-SPA IGNORE LIST
+#GameOfDrones.API/wwwroot
+
+# compiled output
+GameOfDrones-SPA/dist
+GameOfDrones-SPA/tmp
+GameOfDrones-SPA/out-tsc
+Only exists if Bazel was run
+GameOfDrones-SPA/bazel-out
+
+# dependencies
+GameOfDrones-SPA/node_modules
+
+# profiling files
+GameOfDrones-SPA/chrome-profiler-events.json
+GameOfDrones-SPA/speed-measure-plugin.json
+
+# IDEs and editors
+GameOfDrones-SPA/.idea
+GameOfDrones-SPA/.project
+GameOfDrones-SPA/.classpath
+GameOfDrones-SPA/.c9/
+GameOfDrones-SPA/*.launch
+GameOfDrones-SPA/.settings/
+GameOfDrones-SPA/*.sublime-workspace
+
+# IDE - VSCode
+GameOfDrones-SPA/.vscode/*
+GameOfDrones-SPA/.vscode/settings.json
+GameOfDrones-SPA/.vscode/tasks.json
+GameOfDrones-SPA/.vscode/launch.json
+GameOfDrones-SPA/.vscode/extensions.json
+GameOfDrones-SPA/.history/*
+
+# misc
+GameOfDrones-SPA/.sass-cache
+GameOfDrones-SPA/connect.lock
+GameOfDrones-SPA/coverage
+GameOfDrones-SPA/libpeerconnection.log
+GameOfDrones-SPA/npm-debug.log
+GameOfDrones-SPA/yarn-error.log
+GameOfDrones-SPA/testem.log
+GameOfDrones-SPA/typings
+
+# System Files
+GameOfDrones-SPA/.DS_Store
+GameOfDrones-SPA/Thumbs.db
