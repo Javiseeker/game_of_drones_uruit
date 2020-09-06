@@ -1,0 +1,11 @@
+.parent {
+    overflow: hidden;
+    position: relative;
+    margin: 15px;
+    width: 100%;
+}
+
+mat-card {
+    width: calc(100% - 70px);
+    height: calc(100% - 70px);
+  }

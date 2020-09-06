@@ -20,14 +20,14 @@ namespace GameOfDrones.API.Models
         public virtual DbSet<GameStatistics> GameStatistics { get; set; }
         public virtual DbSet<User> User { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=gameofdronesuruit.database.windows.net,1433;Initial Catalog=game_of_drones;Persist Security Info=False;User ID=javiseeker;Password=Javier.123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            }
-        }
+//         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//         {
+//             if (!optionsBuilder.IsConfigured)
+//             {
+// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                 optionsBuilder.UseSqlServer("Server=gameofdronesuruit.database.windows.net,1433;Initial Catalog=game_of_drones;Persist Security Info=False;User ID=javiseeker;Password=Javier.123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+//             }
+//         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -88,11 +88,6 @@ namespace GameOfDrones.API.Models
 
                 entity.Property(e => e.GsUUid).HasColumnName("GS_U_UID");
 
-                entity.HasOne(d => d.GsUU)
-                    .WithMany(p => p.GameStatistics)
-                    .HasForeignKey(d => d.GsUUid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Game_Stat__GS_Sc__66603565");
             });
 
             modelBuilder.Entity<User>(entity =>

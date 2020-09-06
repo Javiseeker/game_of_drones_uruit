@@ -30,9 +30,12 @@ namespace GameOfDrones.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
             services.AddControllers();
+            services.AddCors();
             services.AddScoped<IAuditActionRepository, AuditActionRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGameStatisticsRepository, GameStatisticsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,9 +47,8 @@ namespace GameOfDrones.API
             }
 
             app.UseRouting();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -73,12 +73,6 @@ namespace GameOfDrones.API.Data
                 entity.Property(e => e.GsScore).HasColumnName("GS_Score");
 
                 entity.Property(e => e.GsUUid).HasColumnName("GS_U_UID");
-
-                entity.HasOne(d => d.GsUU)
-                    .WithMany(p => p.GameStatistics)
-                    .HasForeignKey(d => d.GsUUid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Game_Stat__GS_Sc__66603565");
             });
 
             modelBuilder.Entity<User>(entity =>

@@ -41,7 +41,7 @@ namespace GameOfDrones.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAuditActiom( AuditAction auditAction)
+        public async Task<IActionResult> UpdateAuditActiom( AuditAction auditAction)
         {
             var auditActionToUpdate = await _repo.UpdateAuditAction(auditAction);
 
@@ -56,7 +56,7 @@ namespace GameOfDrones.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteAuditAction( AuditAction auditAction)
+        public async Task<IActionResult> DeleteAuditAction( AuditAction auditAction)
         {
             var operation = await _repo.DeleteAuditAction(auditAction);
 

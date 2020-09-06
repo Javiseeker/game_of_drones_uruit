@@ -9,6 +9,5 @@ namespace GameOfDrones.API.Models
         public int GsUUid { get; set; }
         public long GsScore { get; set; }
 
-        public virtual User GsUU { get; set; }
     }
 }
