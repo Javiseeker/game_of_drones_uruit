@@ -16,7 +16,15 @@ export class ApiService {
 
 
   getAuditActions(): Observable<any>{
-    return this.http.get(`${this.apiUrl}/AuditActions`)
+    return this.http.get(`${this.apiUrl}/AuditAction`);
+  }
+
+  getUsers(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/User`);
+  }
+
+  getGameStatistics(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/GameStatistics`);
   }
 
 }

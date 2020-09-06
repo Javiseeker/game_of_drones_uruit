@@ -9,3 +9,8 @@ mat-card {
     width: calc(100% - 70px);
     height: calc(100% - 70px);
   }
+
+  mat-table{
+    width: calc(100% - 70px);
+    height: calc(100% - 70px);
+  }
