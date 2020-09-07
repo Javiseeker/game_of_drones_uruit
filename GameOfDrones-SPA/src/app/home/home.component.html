@@ -1,46 +1,105 @@
-<div style="margin-top: 10px">
-  <h1 style="text-align: center">Game of Drones</h1>
-</div>
-<div>
+<div style="margin-top: 5px">
   <mat-grid-list cols="4" rowHeight="1:1">
     <mat-grid-tile [colspan]="1" [rowspan]="2">
       <mat-card>
-          <div>
-              <h2 style="text-align: center;">Score Board</h2>
-          </div>
+        <div>
+          <h2 style="text-align: center; color: black !important">
+            Score Board
+          </h2>
+        </div>
+        <!-- <div style="justify-content: center;" *ngIf="isLoading == true">
+            <mat-spinner></mat-spinner>
+        </div> -->
+        <div style="overflow: auto; width: auto; height: 85vh;">
+          <table
+          mat-table
+          [dataSource]="dataSource" async
+          class="mat-elevation-z8"
+          *ngIf="isLoading == false"
+        >
+          <!-- Username Column -->
+          <ng-container matColumnDef="uName">
+            <th class="w-100 th-center" mat-header-cell *matHeaderCellDef>Username</th>
+            <td class="td-center" mat-cell *matCellDef="let element">
+              {{ element.uName }}
+            </td>
+          </ng-container>
 
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                <!-- Usename Column -->
-                <ng-container matColumnDef="uName">
-                  <th mat-header-cell *matHeaderCellDef>
-                    <div class="table-padding mat-title-col">Username</div>
-                  </th>
-                  <td mat-cell *matCellDef="let element">
-                    <div class="table-padding">{{element.uName}}</div>
-                  </td>
-                </ng-container>
-    
-                <!-- Score Column -->
-                <ng-container matColumnDef="gsScore">
-                  <th mat-header-cell *matHeaderCellDef>
-                    <div class="table-padding mat-title-col">Score</div>
-                  </th>
-                  <td mat-cell *matCellDef="let element">
-                    <div class="table-padding">{{element.gsScore}}</div>
-                  </td>
-                </ng-container>
-    
-                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
+          <!-- Score Column -->
+          <ng-container matColumnDef="gsScore">
+            <th class="w-100 th-center" mat-header-cell *matHeaderCellDef>Score</th>
+            <td class="td-center" mat-cell *matCellDef="let element">
+              {{ element.gsScore }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        </div>
 
       </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="3" [rowspan]="2">
+      <mat-card>
+        <div>
+          <h2 style="text-align: center; color: black !important">
+            Game Of Drones
+          </h2>
+        </div>
+        <div style="padding-bottom: 35px; padding-top: 15px;">
+          <span style="text-align: center; color: black !important;">
+            Instructions: Best of 5 rounds. Each game is worth 100 points.
+          </span>
+        </div>
 
-      <mat-card> hello world </mat-card>
+        <mat-grid-list cols="4" rowHeight="1:1">
+          <mat-grid-tile [colspan]="3" [rowspan]="2">
+            <div *ngIf="!gameStarted; else elseBlock">
+              <button mat-raised-button color="brown" (click)="startGame()">Play The Game!</button>
+            </div>
+            <ng-template #elseBlock >
+              <button disabled mat-raised-button color="brown">
+                Play The Game!
+              </button>
+            </ng-template>
 
+          </mat-grid-tile>
+
+          <mat-grid-tile [colspan]="1">
+
+            <div style="overflow: auto; width: auto; " *ngIf="gameStarted">
+              <table
+              mat-table
+              [dataSource]="dataSourceCurrentScore"
+              class="mat-elevation-z8"
+            >
+              <!-- Round Column -->
+              <ng-container matColumnDef="round">
+                <th class="w-100 th-center" mat-header-cell *matHeaderCellDef>Round</th>
+                <td class="td-center" mat-cell *matCellDef="let element">
+                  {{ element.round }}
+                </td>
+              </ng-container>
+    
+              <!-- Winner Column -->
+              <ng-container matColumnDef="winner">
+                <th class=" w-100 th-center" mat-header-cell *matHeaderCellDef>Winner</th>
+                <td class="td-center" mat-cell *matCellDef="let element">
+                  {{ element.winner }}
+                </td>
+              </ng-container>
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsCurrentScore;"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsCurrentScore"></tr>
+            </table>
+            </div>
+
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

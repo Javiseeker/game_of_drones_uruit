@@ -1,0 +1,38 @@
+<h1 mat-dialog-title style="text-align: center;">Enter Player Names</h1>
+
+<div mat-dialog-content style="justify-content: center; display: flex; padding-top: 15px; padding-bottom: 15px;">
+    <form #createForm="ngForm" (ngSubmit)="createUsersJson(createForm)" id="createForm">
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Player 1</mat-label>
+                <input type="text" autocomplete="off" maxlength="20" [validationLevel]="'Medium'" id='player1UsernameId' #player1UsernameId='ngModel' [ngModelOptions]="{standalone: true}" name="player1Username" [(ngModel)]="player1Username" matInput placeholder="Username" appTextboxValidator>
+                <mat-hint class="help-block" *ngIf="player1UsernameId.touched && player1UsernameId.errors?.EmptyTextbox">Field Required</mat-hint>
+                <mat-hint class="help-block" *ngIf="player1UsernameId.touched && player1UsernameId.errors?.EmptyTextbox2">Field can't be whitespace(s)</mat-hint>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Player 2</mat-label>
+                <input type="text" autocomplete="off" maxlength="20" [validationLevel]="'Medium'" id='player2UsernameId' #player2UsernameId='ngModel' [ngModelOptions]="{standalone: true}" name="player2Username" [(ngModel)]="player2Username" matInput placeholder="Username" appTextboxValidator>
+                <mat-hint class="help-block" *ngIf="player2UsernameId.touched && player2UsernameId.errors?.EmptyTextbox">Field Required</mat-hint>
+                <mat-hint class="help-block" *ngIf="player2UsernameId.touched && player2UsernameId.errors?.EmptyTextbox2">Field can't be whitespace(s)</mat-hint>
+                <mat-hint class="help-block" *ngIf="validateParams()"> Player 1 and Player 2 usernames must be different</mat-hint>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-actions style="justify-content: center; display: flex;">
+    <div class="centered-buttons">
+        <div *ngIf="(player1UsernameId?.errors === null && player2UsernameId?.errors === null && !validateParams());else elseBlock">
+            <button style="margin-left: 8px;" mat-stroked-button color="primary" form="createForm" type="submit">
+                Start
+            </button>
+        </div>
+        <ng-template #elseBlock>
+            <button mat-stroked-button color="primary" disabled>
+                Start
+            </button>
+        </ng-template>
+    </div>
+</div>

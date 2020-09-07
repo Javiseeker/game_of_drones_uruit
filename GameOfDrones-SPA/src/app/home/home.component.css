@@ -1,16 +1,42 @@
-.parent {
-    overflow: hidden;
-    position: relative;
-    margin: 15px;
-    width: 100%;
+mat-card {
+  width: calc(100% - 70px);
+  height: calc(100% - 70px);
+  background-color: rgba(223, 212, 204, 0.966);
 }
 
-mat-card {
-    width: calc(100% - 70px);
-    height: calc(100% - 70px);
-  }
+.w-100 {
+  width: 100%;
+}
 
-  mat-table{
-    width: calc(100% - 70px);
-    height: calc(100% - 70px);
-  }
+.w-100-cscore {
+  width: fit-content;
+  height: fit-content;
+}
+.th-center {
+  text-align: center;
+}
+
+.td-center {
+  text-align: center;
+}
+
+.mat-row:nth-child(even) {
+  background-color: lightgray;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: gainsboro;
+}
+
+.mat-header-row {
+  background-color: brown;
+}
+
+.mat-cell {
+  color: black;
+  font-size: 17px;
+}
+
+.mat-header-cell {
+  font-size: 20px;
+}

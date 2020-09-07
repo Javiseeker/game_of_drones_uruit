@@ -1,0 +1,75 @@
+<h1 mat-dialog-title style="text-align: center;">
+    Round {{data.round}}
+</h1>
+
+<div mat-dialog-content style="justify-content: center; display: flex; padding-top: 15px; padding-bottom: 15px;">
+    <form #createForm="ngForm" (ngSubmit)="defineRound()" id="createForm">
+        <span *ngIf="tie" style="padding-bottom: 10px;">
+            Tie. Play again!
+        </span>
+        <div *ngIf="roundTurn === 'player1'">
+            <mat-form-field appearance="outline">
+                <mat-label>{{data.player1}}</mat-label>
+                <mat-select appDropdownValidator [ngModelOptions]="{standalone: true}" [(ngModel)]="player1Selection"
+                    name="player1Selection" id='player1SelectionId' #player1SelectionId='ngModel'
+                    [required]=true>
+                    <mat-option *ngFor="let element of selections"
+                        [value]="element">
+                        {{ element }}
+                    </mat-option>
+                </mat-select>
+                <mat-hint class="help-block"
+                    *ngIf="player1SelectionId.touched && player1SelectionId.errors?.EmptyDropdown">Field Required</mat-hint>
+
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="roundTurn === 'player2'">
+            <mat-form-field appearance="outline">
+                <mat-label>{{data.player2}}</mat-label>
+                <mat-select appDropdownValidator [ngModelOptions]="{standalone: true}" [(ngModel)]="player2Selection"
+                    name="player2Selection" id='player2SelectionId' #player2SelectionId='ngModel'
+                    [required]=true>
+                    <mat-option *ngFor="let element of selections"
+                        [value]="element">
+                        {{ element }}
+                    </mat-option>
+                </mat-select>
+                <mat-hint class="help-block"
+                    *ngIf="player2SelectionId.touched && player2SelectionId.errors?.EmptyDropdown">Field Required</mat-hint>
+
+            </mat-form-field>
+        </div>
+
+    </form>
+</div>
+
+<div mat-dialog-actions style="justify-content: center; display: flex;" *ngIf="roundTurn === 'player1'">
+    <div class="centered-buttons">
+        <div *ngIf="(player1SelectionId?.errors === null && player2SelectionId?.errors === null);else elseBlock">
+            <button style="margin-left: 8px;" mat-stroked-button color="primary" form="createForm" type="submit">
+                Ok
+            </button>
+        </div>
+        <ng-template #elseBlock>
+            <button mat-stroked-button color="primary" disabled>
+                Ok
+            </button>
+        </ng-template>
+    </div>
+</div>
+
+<div mat-dialog-actions style="justify-content: center; display: flex;" *ngIf="roundTurn === 'player2'">
+    <div class="centered-buttons">
+        <div *ngIf="(player1SelectionId?.errors === null && player2SelectionId?.errors === null);else elseBlock">
+            <button style="margin-left: 8px;" mat-stroked-button color="primary" form="createForm" type="submit">
+                Ok
+            </button>
+        </div>
+        <ng-template #elseBlock>
+            <button mat-stroked-button color="primary" disabled>
+                Ok
+            </button>
+        </ng-template>
+    </div>
+</div>

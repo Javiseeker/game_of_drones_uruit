@@ -27,4 +27,9 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/GameStatistics`);
   }
 
+  postGameStatistics(username: string, score: number): Observable<any>{
+    const fields =  { UName: username, GsScore: score };
+    return this.http.post(`${this.apiUrl}/GameStatistics`, fields);
+  }
+
 }
