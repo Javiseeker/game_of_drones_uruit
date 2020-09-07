@@ -8,4 +8,4 @@ I took a Database-first approach for the back-end Models. Take a look at the fol
 
 
 ## Front-end: Angular 10
-I'm using the Angular Material UI component library. I'm doing all necessary validations in the Front-end.
+I'm using the Angular Material UI component library. I'm doing all necessary validations in the Front-end. The logic required to decide what player wins resides in the Front-end.
