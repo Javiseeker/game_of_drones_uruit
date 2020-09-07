@@ -14,6 +14,7 @@ export class RoundComponent implements OnInit {
   player1Selection: string;
   player2Selection: string;
   tie = false;
+  optionChosen = false;
   @ViewChild('player1SelectionId') player1SelectionId: any;
   @ViewChild('player2SelectionId') player2SelectionId: any;
 
@@ -22,9 +23,11 @@ export class RoundComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   defineRound(): void {
+    this.optionChosen = false;
     if (this.player2Selection == null){
       this.roundTurn = 'player2';
     }
