@@ -16,9 +16,9 @@ I'm using the Angular Material UI component library. I'm doing all necessary val
 2. Download Repository
 `sudo git clone https://https://github.com/Javiseeker/game_of_drones_uruit`
 
-3. Open a terminal. Move to the repository's path game_of_drones_uruit/GameOfDrones.API and run the following commands:
-`dotnet restore`
-`dotnet build`
+3. Open a terminal. Move to the repository's path: game_of_drones_uruit/GameOfDrones.API and run the following commands:
+`dotnet restore`,
+`dotnet build`,
 `dotnet run`
 
 4. Install LTS Nodejs version from https://nodejs.org/es/download/
@@ -26,7 +26,7 @@ I'm using the Angular Material UI component library. I'm doing all necessary val
 5. Run the following command in a new terminal:
 `npm install -g @angular/cli`
 
-6. Open a new terminal. Move to the repository's path game_of_drones_uruit/GameOfDrones-SPA and run the following commands:
-`npm install`
-`ng build`
+6. Open a new terminal. Move to the repository's path: game_of_drones_uruit/GameOfDrones-SPA and run the following commands:
+`npm install`,
+`ng build`,
 `ng serve --open`
