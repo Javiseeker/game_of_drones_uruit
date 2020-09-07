@@ -172,12 +172,9 @@ export class HomeComponent implements OnInit {
     });
     dialogRef2.afterClosed().subscribe(
       dialogResult => {
-        // {playerPositionId: 0 o 1, playerId: 'player1' o 'player2', username: username que gano}
-        // devolver la ronda que se le dio, y el usuario que gano en un json.
         this.playersInformation[dialogResult.playerPositionId][dialogResult.playerId].wins += 1;
-        // asignar el winner dependiendo de la ronda y  el ganador.
         this.currentScoreData[this.roundCounter - 1].winner = dialogResult.username;
-        this.checkGameStatus(); /// se vuelve a llamar la funcion que esta pendiente del status del juego
+        this.checkGameStatus();
       }
     );
 

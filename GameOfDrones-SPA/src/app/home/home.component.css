@@ -1,6 +1,6 @@
 mat-card {
-  width: calc(100% - 70px);
-  height: calc(100% - 70px);
+  width: calc(100% - 70px) !important;
+  height: calc(100% - 70px) !important;
   background-color: rgba(223, 212, 204, 0.966);
 }
 

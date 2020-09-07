@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameOfDrones.API.Data.Interfaces;
 using GameOfDrones.API.Dtos;
@@ -12,8 +14,10 @@ namespace GameOfDrones.API.Controllers
     {
         private readonly IGameStatisticsRepository _repo;
         private readonly IUserRepository _user;
-        public GameStatisticsController(IGameStatisticsRepository repo, IUserRepository user)
+        private readonly IAuditRepository _audit;
+        public GameStatisticsController(IGameStatisticsRepository repo, IUserRepository user, IAuditRepository audit)
         {
+            _audit = audit;
             _repo = repo;
             _user = user;
         }
@@ -21,8 +25,19 @@ namespace GameOfDrones.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetGameStatisticsOrganizedByHighestValue()
         {
-            var organizedGameStatistics = await _repo.GetGameStatisticsOrganizedByHighestValue();
-
+            var organizedGameStatistics = new List<CustomPackageGameStatistics>();
+            try
+            {
+                 organizedGameStatistics = await _repo.GetGameStatisticsOrganizedByHighestValue();
+            }
+            catch (Exception e)
+            {
+                var auditTransaction = new Audit();
+                auditTransaction.AAaUid = 1;
+                auditTransaction.ADescription = e.Message;
+                await _audit.CreateAuditTransaction(auditTransaction);
+            }
+            
             return Ok(organizedGameStatistics);
         }
 
@@ -38,32 +53,97 @@ namespace GameOfDrones.API.Controllers
         public async Task<IActionResult> CreateGameStatistics(CustomPackageGameStatistics customGameStatistics)
         {
             var gameStatistics = new GameStatistics();
+            var auditTransaction = new Audit();
             customGameStatistics.UName = customGameStatistics.UName.ToLower().Trim();
 
             if (!await _user.VerifyUserExists(customGameStatistics.UName))
             {
                 var user = new User();
+
                 user.UName = customGameStatistics.UName;
-                var userToCreate = await _user.CreateUser(user);
-                gameStatistics.GsUUid = userToCreate.UUid;
+
+                try
+                {
+                    await _user.CreateUser(user);
+                }
+                catch (Exception e)
+                {
+                    auditTransaction.AAaUid = 1;
+                    auditTransaction.ADescription = e.Message;
+                    await _audit.CreateAuditTransaction(auditTransaction);
+                }
+
+                gameStatistics.GsUUid = user.UUid;
                 gameStatistics.GsScore = customGameStatistics.GsScore;
-                await _repo.CreateGameStatistics(gameStatistics);
+
+                try
+                {
+                    await _repo.CreateGameStatistics(gameStatistics);
+                }
+                catch (Exception e)
+                {
+                    auditTransaction.AAaUid = 1;
+                    auditTransaction.ADescription = e.Message;
+                    await _audit.CreateAuditTransaction(auditTransaction);
+                }
+                auditTransaction.AAaUid = 3;
+                auditTransaction.ADescription = "Game Finished Succesfully";
+                await _audit.CreateAuditTransaction(auditTransaction);
             }
             else
             {
-                int userId = await _user.GetUserIdByName(customGameStatistics.UName);
+                int userId = 0;
+                try
+                {
+                    userId = await _user.GetUserIdByName(customGameStatistics.UName);
+                }
+                catch (Exception e)
+                {
+                    auditTransaction.AAaUid = 1;
+                    auditTransaction.ADescription = e.Message;
+                    await _audit.CreateAuditTransaction(auditTransaction);
+                }
 
                 if (await _repo.VerifyUserHasPlayed(userId))
                 {
                     gameStatistics = await _repo.GetGameStatisticsByUserId(userId);
                     gameStatistics.GsScore = customGameStatistics.GsScore + gameStatistics.GsScore;
-                    await _repo.UpdateGameStatistics(gameStatistics);
+
+                    try
+                    {
+                        await _repo.UpdateGameStatistics(gameStatistics);
+                    }
+                    catch (Exception e)
+                    {
+
+                        auditTransaction.AAaUid = 1;
+                        auditTransaction.ADescription = e.Message;
+                        await _audit.CreateAuditTransaction(auditTransaction);
+                    }
+                    auditTransaction.AAaUid = 3;
+                    auditTransaction.ADescription = "Game Finished Succesfully";
+                    await _audit.CreateAuditTransaction(auditTransaction);
                 }
                 else
                 {
                     gameStatistics.GsUUid = userId;
                     gameStatistics.GsScore = customGameStatistics.GsScore;
-                    await _repo.CreateGameStatistics(gameStatistics);
+
+                    try
+                    {
+                        await _repo.CreateGameStatistics(gameStatistics);
+                    }
+                    catch (Exception e)
+                    {
+                        auditTransaction.AAaUid = 1;
+                        auditTransaction.ADescription = e.Message;
+                        await _audit.CreateAuditTransaction(auditTransaction);
+                    }
+
+                    auditTransaction.AAaUid = 3;
+                    auditTransaction.ADescription = "Game Finished Succesfully";
+                    await _audit.CreateAuditTransaction(auditTransaction);
+
                 }
 
             }

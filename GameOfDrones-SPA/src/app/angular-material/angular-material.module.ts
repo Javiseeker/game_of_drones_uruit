@@ -10,6 +10,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
    imports: [
@@ -23,7 +24,8 @@ import { MatSelectModule } from '@angular/material/select';
       MatProgressSpinnerModule,
       CommonModule,
       MatSnackBarModule,
-      MatSelectModule
+      MatSelectModule,
+      FlexLayoutModule,
    ],
    exports: [
     MatButtonModule,
@@ -36,7 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatProgressSpinnerModule,
     CommonModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexLayoutModule,
    ],
    providers: []
 })
