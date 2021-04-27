@@ -14,7 +14,7 @@ I'm using the Angular Material UI component library. I'm doing all necessary val
 1. Install the .NET core 3.1.7 SDK from https://dotnet.microsoft.com/download/dotnet-core
 
 2. Download Repository
-`sudo git clone https://https://github.com/Javiseeker/game_of_drones_uruit`
+`sudo git clone https://github.com/Javiseeker/game_of_drones_uruit`
 
 3. Open a terminal. Move to the repository's path: game_of_drones_uruit/GameOfDrones.API and run the following commands:
 `dotnet restore`,
